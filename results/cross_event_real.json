@@ -1,0 +1,246 @@
+{
+  "source": "OpenF1",
+  "year": 2024,
+  "driver": 1,
+  "events": [
+    {
+      "circuit": "Bahrain",
+      "session_key": 9472,
+      "matched_circuit": "Sakhir",
+      "status": "computed",
+      "n_laps": 55,
+      "predictive_benchmark": {
+        "ready": true,
+        "folds": [
+          {
+            "stint": "1",
+            "train_laps": 12,
+            "test_laps": 5,
+            "models": {
+              "median": {
+                "mae_s": 0.6073000000000007,
+                "rmse_s": 1.2779215351499489
+              },
+              "ols": {
+                "mae_s": 0.6061116550116594,
+                "rmse_s": 1.2417930024347563
+              },
+              "piecewise_bic": {
+                "mae_s": 0.6825811475409977,
+                "rmse_s": 1.1338380104780261
+              },
+              "bayesian_mean": {
+                "mae_s": 0.6059639269726347,
+                "rmse_s": 1.2431337749165987
+              }
+            }
+          },
+          {
+            "stint": "2",
+            "train_laps": 14,
+            "test_laps": 5,
+            "models": {
+              "median": {
+                "mae_s": 1.36159999999999,
+                "rmse_s": 1.8666919403050866
+              },
+              "ols": {
+                "mae_s": 0.748806593406593,
+                "rmse_s": 1.4331933057362816
+              },
+              "piecewise_bic": {
+                "mae_s": 0.6504289473684167,
+                "rmse_s": 1.3238342249056636
+              },
+              "bayesian_mean": {
+                "mae_s": 0.7574092362662299,
+                "rmse_s": 1.438499598470052
+              }
+            }
+          },
+          {
+            "stint": "3",
+            "train_laps": 14,
+            "test_laps": 5,
+            "models": {
+              "median": {
+                "mae_s": 0.7659000000000077,
+                "rmse_s": 0.8308077094009237
+              },
+              "ols": {
+                "mae_s": 0.6463692307692526,
+                "rmse_s": 0.7206213716576302
+              },
+              "piecewise_bic": {
+                "mae_s": 0.4098947368421079,
+                "rmse_s": 0.45656143233507335
+              },
+              "bayesian_mean": {
+                "mae_s": 0.6459277381128231,
+                "rmse_s": 0.72025115289772
+              }
+            }
+          }
+        ],
+        "limitations": "Within-stint chronological holdout; same observed retained points. State-space smoother excluded from predictive ranking because retrospective smoothing would leak test data."
+      },
+      "slope": 0.06894113046616723,
+      "ci95": [
+        0.03363229613406073,
+        0.10589349449241615
+      ],
+      "ci_contains_global_median": true
+    },
+    {
+      "circuit": "Monaco",
+      "session_key": 9523,
+      "matched_circuit": "Monte Carlo",
+      "status": "computed",
+      "n_laps": 75,
+      "predictive_benchmark": {
+        "ready": true,
+        "folds": [
+          {
+            "stint": "2",
+            "train_laps": 36,
+            "test_laps": 13,
+            "models": {
+              "median": {
+                "mae_s": 1.4999615384615437,
+                "rmse_s": 1.514075428717529
+              },
+              "ols": {
+                "mae_s": 1.1377958188958321,
+                "rmse_s": 1.2759897288320532
+              },
+              "piecewise_bic": {
+                "mae_s": 0.3655561215606997,
+                "rmse_s": 0.4225298746104803
+              },
+              "bayesian_mean": {
+                "mae_s": 1.134620340904499,
+                "rmse_s": 1.272950930321883
+              }
+            }
+          },
+          {
+            "stint": "3",
+            "train_laps": 19,
+            "test_laps": 7,
+            "models": {
+              "median": {
+                "mae_s": 0.22314285714285884,
+                "rmse_s": 0.283578157530816
+              },
+              "ols": {
+                "mae_s": 2.6870433550364203,
+                "rmse_s": 2.7909603914409784
+              },
+              "piecewise_bic": {
+                "mae_s": 1.488391413373975,
+                "rmse_s": 1.515976392611889
+              },
+              "bayesian_mean": {
+                "mae_s": 2.6618665923301967,
+                "rmse_s": 2.765734609887083
+              }
+            }
+          }
+        ],
+        "limitations": "Within-stint chronological holdout; same observed retained points. State-space smoother excluded from predictive ranking because retrospective smoothing would leak test data."
+      },
+      "slope": -0.10351678405162526,
+      "ci95": [
+        -0.14147780918130035,
+        -0.06387576112209963
+      ],
+      "ci_contains_global_median": false
+    },
+    {
+      "circuit": "Belgium",
+      "session_key": 9574,
+      "matched_circuit": "Spa-Francorchamps",
+      "status": "computed",
+      "n_laps": 42,
+      "predictive_benchmark": {
+        "ready": true,
+        "folds": [
+          {
+            "stint": "1",
+            "train_laps": 7,
+            "test_laps": 3,
+            "models": {
+              "median": {
+                "mae_s": 1.6773333333333322,
+                "rmse_s": 2.622153440717505
+              },
+              "ols": {
+                "mae_s": 4.506928571428499,
+                "rmse_s": 5.215784957490908
+              },
+              "bayesian_mean": {
+                "mae_s": 4.026250315276807,
+                "rmse_s": 4.766334897219074
+              }
+            }
+          },
+          {
+            "stint": "2",
+            "train_laps": 12,
+            "test_laps": 5,
+            "models": {
+              "median": {
+                "mae_s": 1.2236000000000018,
+                "rmse_s": 1.7060451342212473
+              },
+              "ols": {
+                "mae_s": 1.5033111888112018,
+                "rmse_s": 1.6863261363354363
+              },
+              "piecewise_bic": {
+                "mae_s": 1.0970409836065045,
+                "rmse_s": 1.9285509041838202
+              },
+              "bayesian_mean": {
+                "mae_s": 1.497502595232524,
+                "rmse_s": 1.6851749122739266
+              }
+            }
+          },
+          {
+            "stint": "3",
+            "train_laps": 11,
+            "test_laps": 4,
+            "models": {
+              "median": {
+                "mae_s": 0.23150000000000048,
+                "rmse_s": 0.26582795187865393
+              },
+              "ols": {
+                "mae_s": 0.49588636363641214,
+                "rmse_s": 0.5911573651507267
+              },
+              "piecewise_bic": {
+                "mae_s": 0.20760606060604303,
+                "rmse_s": 0.24833131178774084
+              },
+              "bayesian_mean": {
+                "mae_s": 0.46556605389260497,
+                "rmse_s": 0.5634750369716767
+              }
+            }
+          }
+        ],
+        "limitations": "Within-stint chronological holdout; same observed retained points. State-space smoother excluded from predictive ranking because retrospective smoothing would leak test data."
+      },
+      "slope": 0.033715204150546414,
+      "ci95": [
+        -0.05899870305165632,
+        0.13045219818539908
+      ],
+      "ci_contains_global_median": true
+    }
+  ],
+  "median_observed_slope": 0.033715204150546414,
+  "limitations": "Fitted slopes are descriptive heterogeneity, NOT cross-event transfer accuracy. The predictive_benchmark uses within-stint chronological held-out laps, not held-out circuits. Different compounds, weather, fuel loads and circuits confound slope comparisons. No regime-shift claim from CI non-overlap alone."
+}

@@ -1,0 +1,22 @@
+video_id_a,video_id_b,candidate_pairs_in_capped_report,min_phash_distance,max_angle_difference_deg,review_status,note
+hamilton-pov-japon-race,norris-pov-japon-race,4,2,10.0,UNREVIEWED,pHash lookalike across PROVISIONAL split; source overlap not confirmed
+hamilton-pov-japon-horquilla,leclerc-pov-japon-horquilla,4,4,32.0,UNREVIEWED,pHash lookalike across PROVISIONAL split; source overlap not confirmed
+hamilton-pov-japon-race,leclerc-pov-japon-horquilla,4,4,43.0,UNREVIEWED,pHash lookalike across PROVISIONAL split; source overlap not confirmed
+norris-pov-bahrain-t1,norris-pov-china,2,4,19.0,UNREVIEWED,pHash lookalike across PROVISIONAL split; source overlap not confirmed
+hamilton-pov-bahrain-left,hamilton-pov-japon-horquilla,4,6,47.0,UNREVIEWED,pHash lookalike across PROVISIONAL split; source overlap not confirmed
+hamilton-pov-china-t2,norris-pov-miami-left,4,6,96.0,UNREVIEWED,pHash lookalike across PROVISIONAL split; source overlap not confirmed
+hamilton-pov-japon-horquilla,norris-pov-miami-left,4,6,173.0,UNREVIEWED,pHash lookalike across PROVISIONAL split; source overlap not confirmed
+hamilton-pov-japon-race,norris-pov-miami-left,4,6,171.0,UNREVIEWED,pHash lookalike across PROVISIONAL split; source overlap not confirmed
+leclerc-brazil-rain,verstappen_china_2025,3,6,91.0,UNREVIEWED,pHash lookalike across PROVISIONAL split; source overlap not confirmed
+hamilton-pov-bahrain-t1,hamilton-pov-china-slow,2,6,11.0,UNREVIEWED,pHash lookalike across PROVISIONAL split; source overlap not confirmed
+hamilton-pov-china-t2,leclerc-pov-japon-horquilla,2,6,28.0,UNREVIEWED,pHash lookalike across PROVISIONAL split; source overlap not confirmed
+iwasa-pov-bahrain-t1,verstappen_china_2025,2,6,74.0,UNREVIEWED,pHash lookalike across PROVISIONAL split; source overlap not confirmed
+hamilton-pov-bahrain-v3,hamilton-pov-china,1,6,109.0,UNREVIEWED,pHash lookalike across PROVISIONAL split; source overlap not confirmed
+hamilton-pov-china,norris-pov-miami-left,1,6,199.0,UNREVIEWED,pHash lookalike across PROVISIONAL split; source overlap not confirmed
+hamilton-pov-china-t2,perez-brazil-rain,1,6,89.0,UNREVIEWED,pHash lookalike across PROVISIONAL split; source overlap not confirmed
+leclerc-brazil-rain,norris-pov-miami-left,1,6,12.0,UNREVIEWED,pHash lookalike across PROVISIONAL split; source overlap not confirmed
+leclerc-brazil-rain,perez-brazil-rain,1,6,4.0,UNREVIEWED,pHash lookalike across PROVISIONAL split; source overlap not confirmed
+leclerc-china,norris-pov-miami-left,1,6,12.0,UNREVIEWED,pHash lookalike across PROVISIONAL split; source overlap not confirmed
+norris-pov-china,norris-pov-japon-horquilla,1,6,10.0,UNREVIEWED,pHash lookalike across PROVISIONAL split; source overlap not confirmed
+norris-pov-china,norris-pov-miami-left,1,6,13.0,UNREVIEWED,pHash lookalike across PROVISIONAL split; source overlap not confirmed
+perez-brazil-rain,verstappen_china_2025,1,6,42.0,UNREVIEWED,pHash lookalike across PROVISIONAL split; source overlap not confirmed

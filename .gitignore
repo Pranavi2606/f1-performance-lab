@@ -1,0 +1,37 @@
+# Environments and dependencies
+.venv/
+.venv-*/
+venv/
+node_modules/
+dist/
+build/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+.env
+.env.*
+!.env.example
+# Rights-controlled or large source footage, checkpoints and private labels
+*.mp4
+*.mov
+*.avi
+*.pt
+*.pth
+steering_data/
+# Local evaluation outputs (tracked supplied benchmark evidence is kept separately)
+results/steering_ablation.json
+
+# Generated local visual audit can embed non-redistributable F1 footage.
+**/cross_split_gallery_LOCAL_ONLY.html
+results/steering_split_review/
+
+# Audit artifacts may reveal local paths, image-frame provenance and copyrighted source footage
+results/f1_cv_exact_audit/
+results/steering_cross_group_similarity.csv
+results/steering_convergence*_PROVISIONAL*.json
+results/steering_convergence*_PROVISIONAL*.svg
+**/*LOCAL_ONLY*.html
+# Local editor state
+.vscode/
+.idea/
+.DS_Store

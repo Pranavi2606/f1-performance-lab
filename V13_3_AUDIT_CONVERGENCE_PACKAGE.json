@@ -1,0 +1,25 @@
+{
+  "based_on": "F1_Performance_Lab_V13_3_Unified_Steering_Research_And_Training.zip",
+  "artifact_type": "consolidated update; not a new model experiment",
+  "new_features": [
+    "provisional image-free group split preview",
+    "cross-split candidate local gallery",
+    "per-epoch validation MAE and RMSE",
+    "best-epoch checkpoint saving",
+    "validation-only mode for UNREVIEWED group maps",
+    "original experiment output protection",
+    "training-median baseline",
+    "Steering AI Research convergence plots"
+  ],
+  "verification": {
+    "backend_pytest_passed": 44,
+    "typescript_tsx_parse_errors": 0,
+    "frontend_full_build": "NOT_TESTED - npm offline cache lacks React types",
+    "native_cuda": "NOT_TESTED HERE"
+  },
+  "limits": [
+    "No source footage rights established",
+    "Source mapping UNREVIEWED",
+    "No new F1-trained weights or new true accuracy provided"
+  ]
+}

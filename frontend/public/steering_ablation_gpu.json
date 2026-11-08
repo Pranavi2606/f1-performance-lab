@@ -1,0 +1,594 @@
+{
+  "experiment": "steering_cv_temporal_ablation",
+  "status": "evaluated",
+  "seed": 42,
+  "epochs": 1,
+  "pretrained_imagenet_backbone": false,
+  "training_device": "cuda",
+  "label_origin": "manual_f1_annotation",
+  "reference": "annotated visible steering-wheel rotation from F1 onboard images; NOT official telemetry",
+  "split": "recording_id-disjoint train/validation/held-out final test",
+  "train_video_ids": [
+    "albon-monaco",
+    "antonelli-pov-bahrain-t1-v4",
+    "antonelli-pov-japon-race-v2",
+    "bottas-monaco",
+    "colapinto-azerbaiyan",
+    "hamilton-arabia",
+    "hamilton-juego3",
+    "hamilton-pov-bahrain-left",
+    "hamilton-pov-bahrain-t1",
+    "hamilton-pov-bahrain-v3",
+    "hamilton-pov-china",
+    "hamilton-pov-china-slow",
+    "hamilton-pov-japon-race",
+    "hamilton-texas",
+    "iwasa-pov-bahrain-t1",
+    "iwasa-pov-bahrain-t1v2",
+    "norris-juego1",
+    "norris-pov-bahrain-left",
+    "norris-pov-bahrain-t1",
+    "norris-pov-china",
+    "norris-pov-japon-horquilla",
+    "norris-pov-japon-race",
+    "norris-pov-slow-china",
+    "ocon-monaco",
+    "perez-brazil-rain",
+    "piastri-azerbaiyan",
+    "piastri-fov-bahrain",
+    "piastri-pov-bahrain-t1v2",
+    "piastri-pov-bahrain-t1v3",
+    "piastri-pov-slow-bahrain",
+    "piastri-texas",
+    "russel-pov-miami",
+    "russel-singapure",
+    "sainz-azerbaiyan",
+    "sainz-bahrain",
+    "tsunoda-pov-bahrain-slow",
+    "tsunoda-pov-bahrain-t1",
+    "verstappen-china",
+    "verstappen-juego1",
+    "verstappen-pov-bahrain-t1",
+    "verstappen-pov-bahrain-t1v2",
+    "verstappen-pov-china-slow",
+    "verstappen-pov-japon-horquilla",
+    "vertappen_bahrain_2025"
+  ],
+  "validation_video_ids": [
+    "alonso-bahrain",
+    "antonelli-pov-bahrain-t1",
+    "antonelli-pov-bahrain-t1v2",
+    "antonelli-pov-japon-race",
+    "bottas-china",
+    "iwasa-pov-bahrain-left",
+    "leclerc-brazil-rain",
+    "leclerc-juego2",
+    "leclerc-pov-bahrain-t1",
+    "russel-pov-bahrain",
+    "tsunoda-bahrain-left",
+    "verstappen-pov-bahrain-left",
+    "verstappen_china_2025",
+    "yuki-bahrain"
+  ],
+  "test_video_ids": [
+    "hamilton-pov-china-t2",
+    "hamilton-pov-japon-horquilla",
+    "leclerc-china",
+    "leclerc-pov-japon-horquilla",
+    "magnussen-china",
+    "norris-pov-bahrain-t1v2",
+    "norris-pov-miami-left",
+    "norris-texas",
+    "piastri-pov-bahrain-left",
+    "piastri-singapure",
+    "russel-juego1",
+    "tsunoda-japon-horquilla",
+    "verstappen-arabia",
+    "verstappen-juego4"
+  ],
+  "train_sequences": 2184,
+  "validation_sequences": 999,
+  "test_sequences": 803,
+  "models": {
+    "cnn": {
+      "validation": {
+        "status": "computed",
+        "n": 999,
+        "mae_deg": 93.1129,
+        "rmse_deg": 110.441,
+        "p95_abs_error_deg": 177.2229,
+        "bias_deg": -6.1108
+      },
+      "by_validation_video": {
+        "alonso-bahrain": {
+          "status": "computed",
+          "n": 22,
+          "mae_deg": 31.8636,
+          "rmse_deg": 40.4047,
+          "p95_abs_error_deg": 88.7271,
+          "bias_deg": 10.0044
+        },
+        "antonelli-pov-bahrain-t1": {
+          "status": "computed",
+          "n": 3,
+          "mae_deg": 152.5562,
+          "rmse_deg": 152.5613,
+          "p95_abs_error_deg": 154.0229,
+          "bias_deg": -152.5562
+        },
+        "antonelli-pov-bahrain-t1v2": {
+          "status": "computed",
+          "n": 66,
+          "mae_deg": 152.6774,
+          "rmse_deg": 153.7684,
+          "p95_abs_error_deg": 173.2229,
+          "bias_deg": -152.6774
+        },
+        "antonelli-pov-japon-race": {
+          "status": "computed",
+          "n": 4,
+          "mae_deg": 162.0271,
+          "rmse_deg": 162.0292,
+          "p95_abs_error_deg": 162.7771,
+          "bias_deg": 162.0271
+        },
+        "bottas-china": {
+          "status": "computed",
+          "n": 85,
+          "mae_deg": 53.6457,
+          "rmse_deg": 65.3961,
+          "p95_abs_error_deg": 117.0229,
+          "bias_deg": -5.3876
+        },
+        "iwasa-pov-bahrain-left": {
+          "status": "computed",
+          "n": 29,
+          "mae_deg": 123.7771,
+          "rmse_deg": 125.4523,
+          "p95_abs_error_deg": 150.7771,
+          "bias_deg": 123.7771
+        },
+        "leclerc-brazil-rain": {
+          "status": "computed",
+          "n": 56,
+          "mae_deg": 28.6883,
+          "rmse_deg": 40.7091,
+          "p95_abs_error_deg": 83.4729,
+          "bias_deg": 0.045
+        },
+        "leclerc-juego2": {
+          "status": "computed",
+          "n": 481,
+          "mae_deg": 105.5143,
+          "rmse_deg": 120.6998,
+          "p95_abs_error_deg": 182.7771,
+          "bias_deg": -17.5389
+        },
+        "leclerc-pov-bahrain-t1": {
+          "status": "computed",
+          "n": 3,
+          "mae_deg": 168.8896,
+          "rmse_deg": 168.9297,
+          "p95_abs_error_deg": 172.8229,
+          "bias_deg": -168.8896
+        },
+        "russel-pov-bahrain": {
+          "status": "computed",
+          "n": 12,
+          "mae_deg": 54.3514,
+          "rmse_deg": 71.3945,
+          "p95_abs_error_deg": 155.8729,
+          "bias_deg": 2.1104
+        },
+        "tsunoda-bahrain-left": {
+          "status": "computed",
+          "n": 31,
+          "mae_deg": 171.2932,
+          "rmse_deg": 171.8195,
+          "p95_abs_error_deg": 189.2771,
+          "bias_deg": 171.2932
+        },
+        "verstappen-pov-bahrain-left": {
+          "status": "computed",
+          "n": 39,
+          "mae_deg": 128.7002,
+          "rmse_deg": 131.843,
+          "p95_abs_error_deg": 165.7771,
+          "bias_deg": 128.7002
+        },
+        "verstappen_china_2025": {
+          "status": "computed",
+          "n": 98,
+          "mae_deg": 65.8049,
+          "rmse_deg": 74.4648,
+          "p95_abs_error_deg": 117.7771,
+          "bias_deg": 7.92
+        },
+        "yuki-bahrain": {
+          "status": "computed",
+          "n": 70,
+          "mae_deg": 38.4398,
+          "rmse_deg": 54.8059,
+          "p95_abs_error_deg": 119.8729,
+          "bias_deg": -25.1515
+        }
+      }
+    },
+    "cnn_gru": {
+      "validation": {
+        "status": "computed",
+        "n": 999,
+        "mae_deg": 93.4638,
+        "rmse_deg": 110.4312,
+        "p95_abs_error_deg": 183.9204,
+        "bias_deg": 5.9325
+      },
+      "by_validation_video": {
+        "alonso-bahrain": {
+          "status": "computed",
+          "n": 22,
+          "mae_deg": 33.5419,
+          "rmse_deg": 44.9282,
+          "p95_abs_error_deg": 100.7704,
+          "bias_deg": 22.0476
+        },
+        "antonelli-pov-bahrain-t1": {
+          "status": "computed",
+          "n": 3,
+          "mae_deg": 140.513,
+          "rmse_deg": 140.5185,
+          "p95_abs_error_deg": 141.9796,
+          "bias_deg": -140.513
+        },
+        "antonelli-pov-bahrain-t1v2": {
+          "status": "computed",
+          "n": 66,
+          "mae_deg": 140.6342,
+          "rmse_deg": 141.8178,
+          "p95_abs_error_deg": 161.1796,
+          "bias_deg": -140.6342
+        },
+        "antonelli-pov-japon-race": {
+          "status": "computed",
+          "n": 4,
+          "mae_deg": 174.0704,
+          "rmse_deg": 174.0723,
+          "p95_abs_error_deg": 174.8204,
+          "bias_deg": 174.0704
+        },
+        "bottas-china": {
+          "status": "computed",
+          "n": 85,
+          "mae_deg": 54.4205,
+          "rmse_deg": 65.5127,
+          "p95_abs_error_deg": 124.6204,
+          "bias_deg": 6.6557
+        },
+        "iwasa-pov-bahrain-left": {
+          "status": "computed",
+          "n": 29,
+          "mae_deg": 135.8204,
+          "rmse_deg": 137.3488,
+          "p95_abs_error_deg": 162.8204,
+          "bias_deg": 135.8204
+        },
+        "leclerc-brazil-rain": {
+          "status": "computed",
+          "n": 56,
+          "mae_deg": 33.5059,
+          "rmse_deg": 42.466,
+          "p95_abs_error_deg": 82.5704,
+          "bias_deg": 12.0882
+        },
+        "leclerc-juego2": {
+          "status": "computed",
+          "n": 481,
+          "mae_deg": 104.2125,
+          "rmse_deg": 119.5451,
+          "p95_abs_error_deg": 194.8204,
+          "bias_deg": -5.4956
+        },
+        "leclerc-pov-bahrain-t1": {
+          "status": "computed",
+          "n": 3,
+          "mae_deg": 156.8463,
+          "rmse_deg": 156.8895,
+          "p95_abs_error_deg": 160.7796,
+          "bias_deg": -156.8463
+        },
+        "russel-pov-bahrain": {
+          "status": "computed",
+          "n": 12,
+          "mae_deg": 62.3802,
+          "rmse_deg": 72.7533,
+          "p95_abs_error_deg": 143.8296,
+          "bias_deg": 14.1537
+        },
+        "tsunoda-bahrain-left": {
+          "status": "computed",
+          "n": 31,
+          "mae_deg": 183.3365,
+          "rmse_deg": 183.8283,
+          "p95_abs_error_deg": 201.3204,
+          "bias_deg": 183.3365
+        },
+        "verstappen-pov-bahrain-left": {
+          "status": "computed",
+          "n": 39,
+          "mae_deg": 140.7434,
+          "rmse_deg": 143.623,
+          "p95_abs_error_deg": 177.8204,
+          "bias_deg": 140.7434
+        },
+        "verstappen_china_2025": {
+          "status": "computed",
+          "n": 98,
+          "mae_deg": 67.5254,
+          "rmse_deg": 76.6865,
+          "p95_abs_error_deg": 127.2704,
+          "bias_deg": 19.9632
+        },
+        "yuki-bahrain": {
+          "status": "computed",
+          "n": 70,
+          "mae_deg": 37.952,
+          "rmse_deg": 50.4274,
+          "p95_abs_error_deg": 107.8296,
+          "bias_deg": -13.1082
+        }
+      }
+    },
+    "cnn_gru_flow": {
+      "validation": {
+        "status": "computed",
+        "n": 999,
+        "mae_deg": 61.2973,
+        "rmse_deg": 76.259,
+        "p95_abs_error_deg": 149.9015,
+        "bias_deg": 24.5416
+      },
+      "by_validation_video": {
+        "alonso-bahrain": {
+          "status": "computed",
+          "n": 22,
+          "mae_deg": 59.4981,
+          "rmse_deg": 66.2883,
+          "p95_abs_error_deg": 102.0644,
+          "bias_deg": -2.9107
+        },
+        "antonelli-pov-bahrain-t1": {
+          "status": "computed",
+          "n": 3,
+          "mae_deg": 65.2598,
+          "rmse_deg": 66.066,
+          "p95_abs_error_deg": 77.5681,
+          "bias_deg": -65.2598
+        },
+        "antonelli-pov-bahrain-t1v2": {
+          "status": "computed",
+          "n": 66,
+          "mae_deg": 64.9093,
+          "rmse_deg": 70.6905,
+          "p95_abs_error_deg": 106.6113,
+          "bias_deg": -64.9093
+        },
+        "antonelli-pov-japon-race": {
+          "status": "computed",
+          "n": 4,
+          "mae_deg": 105.7376,
+          "rmse_deg": 105.8227,
+          "p95_abs_error_deg": 111.0069,
+          "bias_deg": 105.7376
+        },
+        "bottas-china": {
+          "status": "computed",
+          "n": 85,
+          "mae_deg": 44.597,
+          "rmse_deg": 55.505,
+          "p95_abs_error_deg": 120.0995,
+          "bias_deg": 15.4734
+        },
+        "iwasa-pov-bahrain-left": {
+          "status": "computed",
+          "n": 29,
+          "mae_deg": 105.7615,
+          "rmse_deg": 108.4579,
+          "p95_abs_error_deg": 146.4177,
+          "bias_deg": 105.7615
+        },
+        "leclerc-brazil-rain": {
+          "status": "computed",
+          "n": 56,
+          "mae_deg": 39.8297,
+          "rmse_deg": 53.272,
+          "p95_abs_error_deg": 104.8369,
+          "bias_deg": -4.2368
+        },
+        "leclerc-juego2": {
+          "status": "computed",
+          "n": 481,
+          "mae_deg": 58.5959,
+          "rmse_deg": 74.0487,
+          "p95_abs_error_deg": 152.2278,
+          "bias_deg": 28.8309
+        },
+        "leclerc-pov-bahrain-t1": {
+          "status": "computed",
+          "n": 3,
+          "mae_deg": 52.2109,
+          "rmse_deg": 52.2912,
+          "p95_abs_error_deg": 55.0982,
+          "bias_deg": -52.2109
+        },
+        "russel-pov-bahrain": {
+          "status": "computed",
+          "n": 12,
+          "mae_deg": 71.5776,
+          "rmse_deg": 81.3165,
+          "p95_abs_error_deg": 138.498,
+          "bias_deg": -24.723
+        },
+        "tsunoda-bahrain-left": {
+          "status": "computed",
+          "n": 31,
+          "mae_deg": 146.2569,
+          "rmse_deg": 147.3862,
+          "p95_abs_error_deg": 177.6825,
+          "bias_deg": 146.2569
+        },
+        "verstappen-pov-bahrain-left": {
+          "status": "computed",
+          "n": 39,
+          "mae_deg": 108.0057,
+          "rmse_deg": 113.1155,
+          "p95_abs_error_deg": 164.9892,
+          "bias_deg": 108.0057
+        },
+        "verstappen_china_2025": {
+          "status": "computed",
+          "n": 98,
+          "mae_deg": 47.741,
+          "rmse_deg": 66.6472,
+          "p95_abs_error_deg": 149.2169,
+          "bias_deg": 22.6332
+        },
+        "yuki-bahrain": {
+          "status": "computed",
+          "n": 70,
+          "mae_deg": 47.3004,
+          "rmse_deg": 57.4009,
+          "p95_abs_error_deg": 107.2652,
+          "bias_deg": 1.6327
+        }
+      }
+    }
+  },
+  "limitations": "Accuracy is relative to provided labels, not instrumented F1 steering telemetry; recording groups inferred from filenames must be manually checked for leakage. Source fps may beunknown. Underlying footage rights not established.",
+  "selected_model": {
+    "mode": "cnn_gru_flow",
+    "validation_mae_deg": 61.2973,
+    "final_test": {
+      "status": "computed",
+      "n": 803,
+      "mae_deg": 47.1,
+      "rmse_deg": 57.848,
+      "p95_abs_error_deg": 112.6097,
+      "bias_deg": 21.7221
+    },
+    "by_final_test_video": {
+      "hamilton-pov-china-t2": {
+        "status": "computed",
+        "n": 39,
+        "mae_deg": 34.6746,
+        "rmse_deg": 54.6768,
+        "p95_abs_error_deg": 107.3481,
+        "bias_deg": 30.9146
+      },
+      "hamilton-pov-japon-horquilla": {
+        "status": "computed",
+        "n": 21,
+        "mae_deg": 69.5026,
+        "rmse_deg": 72.4171,
+        "p95_abs_error_deg": 90.4922,
+        "bias_deg": 66.9293
+      },
+      "leclerc-china": {
+        "status": "computed",
+        "n": 54,
+        "mae_deg": 60.6396,
+        "rmse_deg": 74.3136,
+        "p95_abs_error_deg": 139.2519,
+        "bias_deg": 15.488
+      },
+      "leclerc-pov-japon-horquilla": {
+        "status": "computed",
+        "n": 6,
+        "mae_deg": 65.514,
+        "rmse_deg": 77.4326,
+        "p95_abs_error_deg": 108.9773,
+        "bias_deg": 65.514
+      },
+      "magnussen-china": {
+        "status": "computed",
+        "n": 5,
+        "mae_deg": 34.4486,
+        "rmse_deg": 43.209,
+        "p95_abs_error_deg": 61.638,
+        "bias_deg": 31.9297
+      },
+      "norris-pov-bahrain-t1v2": {
+        "status": "computed",
+        "n": 16,
+        "mae_deg": 58.7729,
+        "rmse_deg": 60.9776,
+        "p95_abs_error_deg": 75.8828,
+        "bias_deg": -58.7729
+      },
+      "norris-pov-miami-left": {
+        "status": "computed",
+        "n": 80,
+        "mae_deg": 33.496,
+        "rmse_deg": 41.0799,
+        "p95_abs_error_deg": 71.7398,
+        "bias_deg": 0.5355
+      },
+      "norris-texas": {
+        "status": "computed",
+        "n": 47,
+        "mae_deg": 50.8678,
+        "rmse_deg": 60.1003,
+        "p95_abs_error_deg": 105.5651,
+        "bias_deg": 15.664
+      },
+      "piastri-pov-bahrain-left": {
+        "status": "computed",
+        "n": 18,
+        "mae_deg": 63.2596,
+        "rmse_deg": 64.2827,
+        "p95_abs_error_deg": 81.0921,
+        "bias_deg": 63.2596
+      },
+      "piastri-singapure": {
+        "status": "computed",
+        "n": 81,
+        "mae_deg": 45.1489,
+        "rmse_deg": 57.5062,
+        "p95_abs_error_deg": 113.1063,
+        "bias_deg": 12.6896
+      },
+      "russel-juego1": {
+        "status": "computed",
+        "n": 105,
+        "mae_deg": 47.2404,
+        "rmse_deg": 57.1402,
+        "p95_abs_error_deg": 100.1088,
+        "bias_deg": 21.6313
+      },
+      "tsunoda-japon-horquilla": {
+        "status": "computed",
+        "n": 19,
+        "mae_deg": 124.3226,
+        "rmse_deg": 124.7728,
+        "p95_abs_error_deg": 136.2995,
+        "bias_deg": 124.3226
+      },
+      "verstappen-arabia": {
+        "status": "computed",
+        "n": 103,
+        "mae_deg": 40.0398,
+        "rmse_deg": 47.7021,
+        "p95_abs_error_deg": 92.0014,
+        "bias_deg": 12.1121
+      },
+      "verstappen-juego4": {
+        "status": "computed",
+        "n": 209,
+        "mae_deg": 42.6629,
+        "rmse_deg": 50.7077,
+        "p95_abs_error_deg": 96.667,
+        "bias_deg": 26.5856
+      }
+    },
+    "selection_policy": "Model selected solely by validation MAE; final test held out for independent evaluation."
+  }
+}

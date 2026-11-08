@@ -1,0 +1,8 @@
+torch>=2.2
+torchvision>=0.17
+opencv-python>=4.7
+numpy>=1.26
+# Optional custom YOLOv8 wheel-mask preprocessing; review Ultralytics license before use:
+# ultralytics>=8.2
+# Optional dataset download; not required if you already have local files.
+huggingface_hub>=0.24

@@ -1,0 +1,48 @@
+{
+  "source": "OpenF1",
+  "year": 2024,
+  "driver": 1,
+  "events": [
+    {
+      "circuit": "Bahrain",
+      "session_key": 9472,
+      "matched_circuit": "Sakhir",
+      "status": "computed",
+      "n_laps": 55,
+      "slope": 0.06894113046616723,
+      "ci95": [
+        0.03363229613406073,
+        0.10589349449241615
+      ],
+      "ci_contains_global_median": true
+    },
+    {
+      "circuit": "Monaco",
+      "session_key": 9523,
+      "matched_circuit": "Monte Carlo",
+      "status": "computed",
+      "n_laps": 75,
+      "slope": -0.10351678405162526,
+      "ci95": [
+        -0.14147780918130035,
+        -0.06387576112209963
+      ],
+      "ci_contains_global_median": false
+    },
+    {
+      "circuit": "Belgium",
+      "session_key": 9574,
+      "matched_circuit": "Spa-Francorchamps",
+      "status": "computed",
+      "n_laps": 42,
+      "slope": 0.033715204150546414,
+      "ci95": [
+        -0.05899870305165632,
+        0.13045219818539908
+      ],
+      "ci_contains_global_median": true
+    }
+  ],
+  "median_observed_slope": 0.033715204150546414,
+  "limitations": "Descriptive heterogeneity, not cross-event predictive validation"
+}

@@ -1,0 +1,71 @@
+{
+  "stable": {
+    "source": "synthetic_only",
+    "scenario": "stable",
+    "runs": 500,
+    "seed": 42,
+    "empirical_slope_coverage_95": 0.994,
+    "coverage_mc_se": 0.0034536936748935927,
+    "mean_slope_interval_width_s_per_lap": 0.04546612117732517,
+    "posterior_slope_cdf_rank_histogram_10_bins": [
+      20,
+      49,
+      50,
+      59,
+      71,
+      69,
+      55,
+      48,
+      46,
+      33
+    ],
+    "target": 0.95,
+    "interpretation": "Synthetic slope-interval coverage only; not real-race calibration. CDF ranks are not predictive PIT. Scenario mismatch (especially cliff) can reduce coverage."
+  },
+  "high_deg": {
+    "source": "synthetic_only",
+    "scenario": "high_deg",
+    "runs": 500,
+    "seed": 42,
+    "empirical_slope_coverage_95": 0.994,
+    "coverage_mc_se": 0.0034536936748935927,
+    "mean_slope_interval_width_s_per_lap": 0.045645084439025645,
+    "posterior_slope_cdf_rank_histogram_10_bins": [
+      19,
+      48,
+      50,
+      56,
+      74,
+      66,
+      56,
+      49,
+      49,
+      33
+    ],
+    "target": 0.95,
+    "interpretation": "Synthetic slope-interval coverage only; not real-race calibration. CDF ranks are not predictive PIT. Scenario mismatch (especially cliff) can reduce coverage."
+  },
+  "cliff": {
+    "source": "synthetic_only",
+    "scenario": "cliff",
+    "runs": 500,
+    "seed": 42,
+    "empirical_slope_coverage_95": 0.056,
+    "coverage_mc_se": 0.010282412168358162,
+    "mean_slope_interval_width_s_per_lap": 0.05658849247787002,
+    "posterior_slope_cdf_rank_histogram_10_bins": [
+      499,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "target": 0.95,
+    "interpretation": "Synthetic slope-interval coverage only; not real-race calibration. CDF ranks are not predictive PIT. Scenario mismatch (especially cliff) can reduce coverage."
+  }
+}
