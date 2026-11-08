@@ -37,8 +37,8 @@ def test_holdout_requires_events():
 
 
 def test_routes_registered():
-    paths={r.path for r in app.routes}
+    paths=set(app.openapi()["paths"])
     assert "/api/lab/scenario" in paths and "/api/lab/held-out-events" in paths
 
 def test_historical_route_registered():
-    assert "/api/lab/historical-evaluation" in {r.path for r in app.routes}
+    assert "/api/lab/historical-evaluation" in set(app.openapi()["paths"])
