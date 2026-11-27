@@ -7,7 +7,7 @@ const pages = [
   ["benchmark","Research Results",ChartNoAxesCombined],["steering","Steering AI Research",ScanEye],["debrief","Driver Debrief",SplitSquareVertical]
 ] as const;
 
-export default function Sidebar({active,setActive,year,setYear,races,round,setRound}:any) {
+export default function Sidebar({active,setActive,year,setYear,races,round,setRound,backendOnline}:any) {
   return <aside className="sidebar">
     <div className="brand"><div className="brand-mark"><span>F1</span></div><div><div className="brand-title">PERFORMANCE LAB</div><div className="brand-sub">RACE DECISION SYSTEM</div></div></div>
     <div className="session-box">
@@ -16,7 +16,7 @@ export default function Sidebar({active,setActive,year,setYear,races,round,setRo
       <label>GRAND PRIX<select value={races.length ? round : ""} disabled={!races.length} onChange={e=>setRound(Number(e.target.value))}>{!races.length&&<option value="">No races loaded — check API</option>}{races.map((r:any)=><option key={r.round} value={r.round}>{String(r.round).padStart(2,"0")} · {r.raceName.replace(" Grand Prix","")}</option>)}</select></label>
     </div>
     <nav className="nav">{pages.map(([key,label,Icon])=><button key={key} onClick={()=>setActive(key)} className={`nav-item ${active===key?"active":""}`}><Icon size={17}/><span>{label}</span><span className="nav-arrow">›</span></button>)}</nav>
-    <div className="sidebar-bottom"><div className="live-dot"></div><div><strong>PUBLIC DATA MODE</strong><small>API status shown above</small></div></div>
+    <div className="sidebar-bottom"><div className={`live-dot ${backendOnline===true?"online":backendOnline===false?"offline":"checking"}`}></div><div><strong>PUBLIC DATA MODE</strong><small>{backendOnline===true?"Backend reachable":backendOnline===false?"Backend unreachable":"Checking backend"}</small></div></div>
     <div className="side-meta"><Settings2 size={13}/> PUBLIC DATA MODE</div>
   </aside>
 }
