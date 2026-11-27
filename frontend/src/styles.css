@@ -48,3 +48,60 @@
 .steering-convergence-grid > div { min-width:0; }
 .steering-convergence-grid h4 { font-size:15px; font-weight:650; margin:10px 4px 14px; }
 @media (max-width: 850px) { .steering-convergence-grid { grid-template-columns: minmax(0,1fr); } }
+
+
+
+/* Consistent styling for research and strategy components previously left
+   with default browser inputs/headings. Matches the dark card visual system. */
+.page .stack{display:grid;gap:16px;min-width:0}
+.page .panel{min-width:0;padding:20px;background:linear-gradient(145deg,#0d1219,#0a0e14);border:1px solid #202832;border-radius:9px}
+.page .panel-title-row,.page .chart-header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:18px}
+.page .panel-title-row svg{color:#a7b4c4;flex:0 0 auto}
+.page .eyebrow{color:#91a0b3;font-size:10px;letter-spacing:1.35px;font-weight:800;text-transform:uppercase}
+.page .panel h2{font-family:"Space Grotesk",Inter,system-ui,sans-serif;font-size:21px;font-weight:700;line-height:1.35;letter-spacing:-.35px;margin:7px 0 9px}
+.page .panel h3{font-family:"Space Grotesk",Inter,system-ui,sans-serif;font-size:16px;font-weight:700;margin:7px 0 14px}
+.page .muted,.page .muted-note,.page .source-note,.page .panel p{font-family:Inter,system-ui,sans-serif;color:#a6b3c4;font-size:12px;line-height:1.7}
+.page .muted{margin:7px 0}
+.page .muted-note{margin:12px 0}
+.page .sim-grid,.page .control-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:14px}
+.page .sim-grid label,.page .control-grid label{min-width:0;display:grid;gap:8px;color:#96a5b8;font-size:11px;letter-spacing:.25px;font-weight:650}
+.page .sim-grid input,.page .control-grid input,.page .control-grid select,.page .ml-control input{width:100%;min-width:0;background:#111923;color:#edf3fa;border:1px solid #2a3746;border-radius:7px;padding:11px 12px;font-size:12px;outline:none}
+.page .sim-grid input:hover,.page .control-grid input:hover,.page .control-grid select:hover,.page .ml-control input:hover{border-color:#536377}
+.page input:focus-visible,.page select:focus-visible,.page button:focus-visible{outline:2px solid #e35454;outline-offset:2px}
+.page .primary-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:5px;background:#e10600;border:1px solid #e10600;border-radius:7px;color:#fff;font-size:12px;font-weight:800;letter-spacing:.3px;padding:12px 17px;min-height:42px;box-shadow:0 5px 18px #e106001a;transition:background .15s ease,transform .15s ease}
+.page .primary-button:hover{background:#fa261f;transform:translateY(-1px)}
+.page .primary-button:disabled{cursor:wait;opacity:.6;transform:none}
+.page .simulator-note{display:flex;align-items:flex-start;gap:11px;background:#11171e;border-color:#293747;color:#aab8c8;font-size:12px;line-height:1.7}
+.page .simulator-note svg{flex:0 0 auto;margin-top:2px;color:#e0b467}
+.page .simulator-note strong{color:#e3ebf5}
+.page .source-note{margin-top:14px;padding:12px 14px;background:#101721;border:1px solid #283646;border-radius:7px;overflow-wrap:anywhere}
+.page .table-wrap{width:100%;overflow-x:auto;margin-top:12px}
+.page .table-wrap table{width:100%;border-collapse:collapse;color:#b0bdcb;font-size:12px}
+.page .table-wrap th{color:#9bacbe;font-size:10px;font-weight:800;letter-spacing:.65px;text-align:left;padding:12px 10px;border-bottom:1px solid #293544;white-space:nowrap}
+.page .table-wrap td{padding:12px 10px;border-bottom:1px solid #222d39;vertical-align:top}
+.page .table-wrap tbody tr:hover{background:#111924}
+.page .table-wrap td strong{color:#e7eef8}
+.page .metric-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:14px 0}
+.page .metric-card{background:#0d1219;border:1px solid #202832;border-radius:8px;padding:18px}
+.page .metric-label{color:#9cacc0;font-size:10px;font-weight:800;letter-spacing:1px}
+.page .metric-value{font-family:"Space Grotesk",Inter,sans-serif;font-size:24px;font-weight:700;color:#edf2fa;margin:9px 0}
+.page .metric-sub{color:#91a1b5;font-size:11px}
+.page .data-quality,.page .reason{color:#a4b3c5;font-size:12px;line-height:1.7}
+.page .recommendation{border-radius:5px;padding:7px 10px;font-size:10px;font-weight:800;display:flex;align-items:center;gap:6px}
+.page .recommendation.high_deg{color:#f49a8e;background:#331a1c}
+.page .recommendation.low_deg{color:#84e1bd;background:#122a21}
+.page .kicker{color:#92a0b2}
+.page .micro{font-size:11px;color:#8999ac;line-height:1.6}
+.page .result-label{color:#9daabc}
+.top-status{font-weight:800}
+.top-status.online{color:#61d5a2}
+.top-status.offline{color:#f18f86}
+.top-status.checking{color:#e0b66c}
+.live-dot.offline{background:#df756e;box-shadow:0 0 9px #df756e75}
+.live-dot.checking{background:#dba75a;box-shadow:0 0 9px #dba75a75}
+.sidebar-bottom small{color:#91a0b1}
+.debrief-run-actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:18px}
+.debrief-run-actions .run-btn{margin:0;min-height:42px;font-size:12px;padding:11px 15px}
+.debrief-run-actions .muted-note{margin:0;flex:1;min-width:200px}
+@media(max-width:1100px){.page .sim-grid,.page .control-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.page .sim-grid,.page .control-grid,.page .metric-grid{grid-template-columns:minmax(0,1fr)}.page .panel{padding:16px}.debrief-run-actions{align-items:stretch}.debrief-run-actions .run-btn{width:100%;justify-content:center}}
