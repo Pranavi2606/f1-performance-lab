@@ -20,7 +20,8 @@ def test_long_429_no_retry():
     with patch('app.services.http.requests.get',return_value=response(429,headers={'Retry-After':'60'})) as client,patch('app.services.http.time.sleep') as sleeper:
         try: get_json('https://api.openf1.org/v1/car_data');assert False
         except requests.HTTPError as exc: assert exc.response.status_code==429
-    client.assert_called_once();sleeper.assert_not_called()
+    client.assert_called_once()
+    assert all(args.args[0] < 2 for args in sleeper.call_args_list)  # pacing is fine; do not sleep for Retry-After: 60
 
 
 def test_401_no_retry():
