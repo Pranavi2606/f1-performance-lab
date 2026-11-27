@@ -34,7 +34,7 @@ export default function DebriefPage({year,round,drivers}:any){
     setDetailDriver(prev => prev && fallback.includes(prev) ? prev : fallback[0]);
   },[drivers,primary]);
   // Run expensive upstream requests only when a visitor explicitly asks.
-  useEffect(()=>{setData(null);setError('')},[year,round,primary,selectedCompare.join(','),primaryLap,compareLap]);
+  useEffect(()=>{setRequest(null);setData(null);setError('')},[year,round,primary,selectedCompare.join(','),primaryLap,compareLap]);
   useEffect(()=>{if(!request)return;let active=true;setBusy(true);setData(null);setError('');getDriverDebrief(request.year,request.round,request.primary,request.compare,request.primaryLap,request.compare.length===1?request.compareLap:undefined).then(x=>{if(active)setData(x)}).catch(e=>{if(active){setData(null);setError(apiErrorMessage(e,'Unable to load driver debrief'))}}).finally(()=>{if(active)setBusy(false)});return()=>{active=false}},[request]);
 
   useEffect(()=>{setPrimaryLap(undefined);getDriverLaps(year,round,primary).then(x=>setPrimaryLaps(x.laps)).catch(()=>setPrimaryLaps([]))},[year,round,primary]);
