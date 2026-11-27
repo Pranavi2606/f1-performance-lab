@@ -1,7 +1,7 @@
 import {useEffect,useState} from "react";
 import {BrainCircuit,Loader2,Activity,Route,Target,Timer} from "lucide-react";
 import axios from "axios";
-import {getResearchBundle,getEnergyComparison} from "../services/api";
+import {apiBaseUrl,getResearchBundle,getEnergyComparison} from "../services/api";
 
 export default function DiscoveryPage({year,round,drivers}:any){
  const [driver,setDriver]=useState(drivers[0]?.driver_number??1),[compareDriver,setCompareDriver]=useState(drivers[1]?.driver_number??drivers[0]?.driver_number??1);
@@ -13,13 +13,13 @@ export default function DiscoveryPage({year,round,drivers}:any){
  const [energyDelta,setEnergyDelta]=useState("");
  const [pitLap,setPitLap]=useState(25);
  async function runScenario(){setScenarioBusy(true);try{
-  const data=(await axios.post("http://localhost:8000/api/lab/scenario",{
+  const data=(await axios.post(`${apiBaseUrl}/lab/scenario`,{
    race_laps:57,base_lap_s:92,pit_loss_s:22,stops:[pitLap],tyre_slope_s_per_lap:tyreSlope,
    energy_delta_s_per_lap:energyDelta===""?null:Number(energyDelta),iterations:1000,seed:42
   })).data;setScenario(data);
  }catch(e:any){setScenario({error:e?.response?.data?.detail??"Scenario request failed"})}finally{setScenarioBusy(false)}}
  useEffect(()=>{if(drivers.length&&!drivers.some((d:any)=>d.driver_number===driver))setDriver(drivers[0].driver_number)},[drivers,driver]);
- async function train(){setBusy(true);try{setModel((await axios.get(`http://localhost:8000/api/ml/lap-time/${year}/${round}/${driver}`)).data)}catch(e){setModel({ready:false,message:"Model could not be trained for this session."})}finally{setBusy(false)}}
+ async function train(){setBusy(true);try{setModel((await axios.get(`${apiBaseUrl}/ml/lap-time/${year}/${round}/${driver}`)).data)}catch(e){setModel({ready:false,message:"Model could not be trained for this session."})}finally{setBusy(false)}}
  async function runResearch(){setResearchBusy(true);setResearch(undefined);setEnergyComparison(undefined);try{const bundle=await getResearchBundle(year,round,driver);setResearch(bundle);if(compareDriver!==driver){try{setEnergyComparison(await getEnergyComparison(year,round,[driver,compareDriver]));}catch{setEnergyComparison(null);}}}catch(e:any){setResearch({error:e?.response?.data?.detail??"Research analysis failed. Check that this event has OpenF1 telemetry."})}finally{setResearchBusy(false)}}
  if(year<2023)return <div className="page"><div className="page-heading"><div><div className="kicker">05 / RESEARCH & MODELLING</div><h2>Performance Discovery</h2><p>Reproducible lap-time modelling from public telemetry.</p></div></div><div className="empty-state card"><BrainCircuit size={30}/><strong>Telemetry research unavailable for 2022</strong><span>Race results may be available through Jolpica, but OpenF1 historical car telemetry coverage begins in 2023.</span></div></div>;
  const tyre=research?.contextual_tyre_analysis, corner=research?.corner_exit_repeatability, energy=research?.energy_fingerprint, segment=research?.normalized_segment_repeatability;

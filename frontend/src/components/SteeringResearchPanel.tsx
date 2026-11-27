@@ -16,7 +16,7 @@ export default function SteeringResearchPanel(){
  const [report,setReport]=useState<SteeringReport|null>(null);
  const [source,setSource]=useState('');const [error,setError]=useState('');
  async function load(file?:File){if(!file)return;try{if(file.size>5_000_000)throw new Error('Report must be under 5 MB.');setReport(validate(JSON.parse(await file.text())));setSource(file.name);setError('');}catch(e){setError(e instanceof Error?e.message:String(e));}}
- useEffect(()=>{let active=true;fetch('/research/steering_ablation_gpu.json').then(r=>{if(!r.ok)throw new Error('No published research report');return r.json()}).then(v=>{if(active){setReport(validate(v));setSource('Published research report')}}).catch(()=>{});return()=>{active=false}},[]);
+ useEffect(()=>{let active=true;fetch('/steering_ablation_gpu.json').then(r=>{if(!r.ok)throw new Error('No published research report');return r.json()}).then(v=>{if(active){setReport(validate(v));setSource('Published research report')}}).catch(()=>{});return()=>{active=false}},[]);
  const data=report?Object.entries(report.models).map(([key,value])=>({model:labels[key]??key,mae:value.validation.mae_deg,rmse:value.validation.rmse_deg,n:value.validation.n})):[];
  const selected=report?.selected_model;
  return <div className="card" style={{marginTop:22}}>
