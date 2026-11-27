@@ -1,7 +1,12 @@
 import axios from "axios";
 import type { DegradationResponse, Driver, OpenF1Session, Race, Result, SimulationResult, DriverTelemetry } from "../types/f1";
 
-const api = axios.create({ baseURL: "/api", timeout: 30000 });
+// Vite's /api proxy is development-only. Production builds must point to the deployed API.
+// This value is public configuration, NOT a place for API keys or credentials.
+const configuredApiBase = import.meta.env.VITE_API_BASE_URL?.trim();
+export const apiBaseUrl = (configuredApiBase || "/api").replace(/\/+$/, "");
+export const backendHealthUrl = `${apiBaseUrl}/health`;
+const api = axios.create({ baseURL: apiBaseUrl, timeout: 30000 });
 
 export interface RaceOverview {
   race: Race; results: Result[]; openf1Session: OpenF1Session; drivers: Driver[];
@@ -40,7 +45,7 @@ export async function getEnergyComparison(year:number,round:number,driverNumbers
 export function apiErrorMessage(error: unknown, context: string): string {
   if (axios.isAxiosError(error)) {
     if (!error.response) {
-      return `${context}: backend API is unreachable. Start FastAPI at http://127.0.0.1:8000 and verify /api/health. (${error.message})`;
+      return `${context}: backend API is unreachable at ${apiBaseUrl}. Check VITE_API_BASE_URL in the deployed frontend, or start your local FastAPI backend. (${error.message})`;
     }
     const detail = error.response.data?.detail;
     return `${context}: HTTP ${error.response.status}${detail ? ` — ${String(detail)}` : ''}`;

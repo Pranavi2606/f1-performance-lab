@@ -12,14 +12,25 @@ def get_race_sessions(year: int):
     return get_json(f"{BASE_URL}/sessions", {"year": year, "session_name": "Race"})
 
 def resolve_race_session(year: int, race_date: str):
+    """Never substitute a different event when the requested race is unavailable.
+
+    Jolpica race_date is a calendar date; OpenF1 starts are timestamped in UTC.
+    A one-day tolerance covers time zones without using an unrelated weekend.
+    """
     sessions = get_race_sessions(year)
-    target = datetime.fromisoformat(race_date).replace(tzinfo=timezone.utc)
-    if not sessions:
-        raise ValueError(f"No OpenF1 race sessions found for {year}")
-    return min(
-        sessions,
-        key=lambda s: abs((_parse_dt(s["date_start"]) - target).total_seconds())
-    )
+    target = datetime.fromisoformat(race_date).date()
+    candidates = []
+    for session in sessions:
+        try:
+            start = _parse_dt(session["date_start"])
+            start = start.replace(tzinfo=timezone.utc) if start.tzinfo is None else start.astimezone(timezone.utc)
+        except (KeyError, ValueError, TypeError, AttributeError):
+            continue
+        if abs((start.date() - target).days) <= 1:
+            candidates.append((abs((start.date() - target).days), abs((start - datetime.combine(target, datetime.min.time(), timezone.utc)).total_seconds()), session))
+    if not candidates:
+        raise ValueError(f"No OpenF1 race session within one calendar day of {race_date} ({year}); refusing a mismatched event")
+    return min(candidates, key=lambda item: (item[0], item[1]))[2]
 
 @lru_cache(maxsize=32)
 def get_drivers(session_key: int):

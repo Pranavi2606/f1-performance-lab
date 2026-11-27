@@ -49,7 +49,7 @@ npm run dev
 
 Open the URL printed by Vite (normally `http://localhost:5173`). API health: `http://localhost:8000/api/health`.
 
-The frontend **requires a running backend** for live race data; publishing a static frontend alone will not deploy the API. Data coverage is determined by the public upstream services and may be incomplete for newer events. This repository deliberately does not include the local F1 image dataset or trained weights.
+The frontend **requires a running backend** for live race data. For deployment on Vercel, see [DEPLOY_VERCEL.md](DEPLOY_VERCEL.md) and configure the frontend build-time `VITE_API_BASE_URL` and backend `CORS_ORIGINS`. Data coverage is determined by the public upstream services and may be incomplete for newer events. This repository deliberately does not include the local F1 image dataset or trained weights.
 
 ## Validation
 
@@ -61,7 +61,7 @@ python -m pytest -q
 
 For the optional steering research dependencies, install separately in a CUDA-capable environment (see [`steering_research/README.md`](steering_research/README.md) and [`REVIEW_AND_CONVERGENCE_START_HERE.md`](REVIEW_AND_CONVERGENCE_START_HERE.md)). This avoids mixing PyTorch requirements into the web API environment.
 
-`GitHub Actions` runs backend/research unit tests and a TypeScript/Vite production build. The package was independently checked with **44 passing local backend tests**; the latest frontend production build must be verified on your machine.
+`GitHub Actions` runs backend/research unit tests and a TypeScript/Vite production build. The latest main-branch CI passed backend unit tests and a frontend production build; the deployment smoke tests are separate. Optional research checks remain scoped to their stated data limitations.
 
 ## Methodology, provenance, and responsible use
 

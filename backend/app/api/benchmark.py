@@ -5,7 +5,11 @@ from fastapi import APIRouter, HTTPException
 
 router = APIRouter(prefix='/api/benchmark', tags=['benchmark'])
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
-BENCHMARK_PATH = PROJECT_ROOT / 'results' / 'cross_event_real.json'
+# Local research runs write to results/; a Vercel backend-root deployment only
+# bundles backend/, so it also ships an immutable copy of the executed report.
+LOCAL_BENCHMARK_PATH = PROJECT_ROOT / 'results' / 'cross_event_real.json'
+BUNDLED_BENCHMARK_PATH = Path(__file__).resolve().parents[2] / 'data' / 'cross_event_real.json'
+BENCHMARK_PATH = LOCAL_BENCHMARK_PATH if LOCAL_BENCHMARK_PATH.is_file() else BUNDLED_BENCHMARK_PATH
 
 @router.get('/latest')
 def latest_benchmark():
