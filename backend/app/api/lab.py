@@ -19,7 +19,10 @@ class Scenario(BaseModel):
 
 @router.post("/scenario")
 def scenario(payload: Scenario):
-    try: return integrated_scenario(**payload.model_dump())
+    try:
+        inputs = payload.model_dump()
+        inputs['tyre_slope_s'] = inputs.pop('tyre_slope_s_per_lap')
+        return integrated_scenario(**inputs)
     except ValueError as exc: raise HTTPException(status_code=422, detail=str(exc))
 
 class Event(BaseModel):
