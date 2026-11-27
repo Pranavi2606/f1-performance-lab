@@ -47,14 +47,18 @@ export function apiErrorMessage(error: unknown, context: string): string {
     if (!error.response) {
       return `${context}: backend API is unreachable at ${apiBaseUrl}. Check VITE_API_BASE_URL in the deployed frontend, or start your local FastAPI backend. (${error.message})`;
     }
-    const detail = error.response.data?.detail;
-    return `${context}: HTTP ${error.response.status}${detail ? ` — ${String(detail)}` : ''}`;
+    const detail = String(error.response.data?.detail ?? "");
+    if (/OpenF1|api\\.openf1\\.org/i.test(detail)) {
+      if (/429|Too Many Requests|rate limit/i.test(detail)) return `${context}: OpenF1 rate limit reached. Wait about one minute before retrying. The backend may still be online.`;
+      if (/401|Unauthorized/i.test(detail)) return `${context}: OpenF1 authorization is required for this data. The backend may still be online.`;
+    }
+    return `${context}: HTTP ${error.response.status}${detail ? ` — ${detail}` : ""}`;
   }
   return `${context}: ${error instanceof Error ? error.message : 'unknown error'}`;
 }
 export async function checkBackendHealth(): Promise<boolean> {
   try {
-    const response = await api.get<{status: string}>("/health", {timeout: 5000});
+    const response = await api.get<{status: string}>("/health", {timeout: 20000});
     return response.data.status === "ok";
   } catch {
     return false;

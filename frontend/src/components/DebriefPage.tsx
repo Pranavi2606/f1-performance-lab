@@ -14,7 +14,7 @@ function metricChart(data:any[], title:string, primaryKey:string, compareKey:str
 export default function DebriefPage({year,round,drivers}:any){
   const primaryDefault = drivers[0]?.driver_number ?? 1;
   const [primary,setPrimary]=useState(primaryDefault);
-  const [selectedCompare,setSelectedCompare]=useState<number[]>(drivers.slice(1,3).map((d:any)=>d.driver_number));
+  const [selectedCompare,setSelectedCompare]=useState<number[]>(drivers.slice(1,2).map((d:any)=>d.driver_number));
   const [detailDriver,setDetailDriver]=useState<number|undefined>(drivers[1]?.driver_number);
   const [data,setData]=useState<any>(null);
   const [primaryLaps,setPrimaryLaps]=useState<Array<{lap_number:number;duration_s:number;compound:string}>>([]);
@@ -23,20 +23,19 @@ export default function DebriefPage({year,round,drivers}:any){
   const [compareLap,setCompareLap]=useState<number|undefined>();
   const [busy,setBusy]=useState(false);
   const [error,setError]=useState('');
+  const [request,setRequest]=useState<{year:number;round:number;primary:number;compare:number[];primaryLap?:number;compareLap?:number}|null>(null);
 
   useEffect(()=>{ if(drivers.length && !drivers.some((d:any)=>d.driver_number===primary)) setPrimary(drivers[0].driver_number); },[drivers]);
   useEffect(()=>{
     const available = drivers.filter((d:any)=>d.driver_number!==primary).map((d:any)=>d.driver_number);
     const next = selectedCompare.filter(x=>available.includes(x));
-    const fallback = next.length ? next : available.slice(0, Math.min(2, available.length));
+    const fallback = next.length ? next : available.slice(0, Math.min(1, available.length));
     setSelectedCompare(fallback);
     setDetailDriver(prev => prev && fallback.includes(prev) ? prev : fallback[0]);
   },[drivers,primary]);
-  useEffect(()=>{
-    if(!selectedCompare.length) return;
-    setBusy(true); setError('');
-    getDriverDebrief(year, round, primary, selectedCompare, primaryLap, selectedCompare.length===1?compareLap:undefined).then((x:any)=>setData(x)).catch((e:any)=>{setData(null);setError(apiErrorMessage(e,'Unable to load driver debrief'))}).finally(()=>setBusy(false));
-  },[year,round,primary,selectedCompare.join(','),primaryLap,compareLap]);
+  // Run expensive upstream requests only when a visitor explicitly asks.
+  useEffect(()=>{setData(null);setError('')},[year,round,primary,selectedCompare.join(','),primaryLap,compareLap]);
+  useEffect(()=>{if(!request)return;let active=true;setBusy(true);setData(null);setError('');getDriverDebrief(request.year,request.round,request.primary,request.compare,request.primaryLap,request.compare.length===1?request.compareLap:undefined).then(x=>{if(active)setData(x)}).catch(e=>{if(active){setData(null);setError(apiErrorMessage(e,'Unable to load driver debrief'))}}).finally(()=>{if(active)setBusy(false)});return()=>{active=false}},[request]);
 
   useEffect(()=>{setPrimaryLap(undefined);getDriverLaps(year,round,primary).then(x=>setPrimaryLaps(x.laps)).catch(()=>setPrimaryLaps([]))},[year,round,primary]);
   useEffect(()=>{setCompareLap(undefined); const driver=selectedCompare[0]; if(!driver)return;getDriverLaps(year,round,driver).then(x=>setCompareLaps(x.laps)).catch(()=>setCompareLaps([]))},[year,round,selectedCompare.join(',')]);
@@ -66,9 +65,10 @@ export default function DebriefPage({year,round,drivers}:any){
     {selectedCompare.length===1&&<label>Comparison lap<select value={compareLap??''} onChange={e=>setCompareLap(e.target.value?Number(e.target.value):undefined)}><option value="">Fastest valid</option>{compareLaps.map(l=><option key={l.lap_number} value={l.lap_number}>Lap {l.lap_number} · {l.duration_s.toFixed(3)} s · {l.compound}</option>)}</select></label>}
     </div>
     <div className="debrief-driver-picker"><div className="debrief-picker-title"><strong>Compare against</strong><span>Select one for detailed 1:1, or multiple for the leaderboard.</span><span>{selectedCompare.length} selected</span></div><div className="debrief-driver-grid">{drivers.filter((d:any)=>d.driver_number!==primary).map((d:any)=><label className={`debrief-driver-choice ${selectedCompare.includes(d.driver_number)?'selected':''}`} key={d.driver_number}><input type="checkbox" checked={selectedCompare.includes(d.driver_number)} onChange={()=>toggleCompare(d.driver_number)}/><span>{d.name_acronym}</span><span>{d.full_name}</span></label>)}</div></div>
+    <div className="debrief-run-actions"><button className="run-btn" type="button" disabled={!selectedCompare.length||busy} onClick={()=>setRequest({year,round,primary,compare:[...selectedCompare],primaryLap,compareLap})}>{busy?"ANALYSING…":"RUN DRIVER COMPARISON"}</button><p className="muted-note">Run on demand to avoid exceeding OpenF1 rate limits. Start with one driver.</p></div>
   </section>
   <div className="card" style={{marginBottom:16}}><div className="kicker">CHANNEL AVAILABILITY</div><p>Available: speed, throttle, brake, gear, RPM and approximate delta-time traces. <strong>Unavailable:</strong> official steering angle, slip angle, tyre state and direct oversteer/understeer measurements.</p>{data?.steering_trace && <p className="muted-note"><AlertTriangle size={14} style={{verticalAlign:'text-bottom',marginRight:6}}/>{data.steering_trace.reason}</p>}</div>
-  {busy ? <div className="loading"><Loader2 className="spin"/> Loading debrief comparison…</div> : error ? <div className="error-box">{error}</div> : !data ? <div className="empty-state card"><Activity size={30}/><strong>No driver debrief data</strong><span>Select at least one comparison driver to load the analysis.</span></div> : <>
+  {busy ? <div className="loading"><Loader2 className="spin"/> Loading debrief comparison…</div> : error ? <div className="error-box">{error}</div> : !data ? <div className="empty-state card"><Activity size={30}/><strong>No driver debrief data</strong><span>Select drivers, then click Run Driver Comparison.</span></div> : <>
     <div className="stat-grid four"><div className="stat"><span>PRIMARY LAP</span><strong>{data.primary_driver.lap_number}</strong><small>{primaryName} · {data.primary_driver.lap_time_s.toFixed(3)}s</small></div><div className="stat"><span>COMPARISONS</span><strong>{comparisons.length}</strong><small>One-to-many summary enabled</small></div><div className="stat"><span>DETAIL LAP</span><strong>{detail?.compare_lap_number ?? '—'}</strong><small>{detail?.compare_driver ?? 'No detail selection'}</small></div><div className="stat"><span>STEERING TRACE</span><strong>Unavailable</strong><small>CV estimate can be added later</small></div></div>
     <div className="card debrief-leaderboard"><div className="card-head"><div><div className="kicker">STEP 02 · MULTI-DRIVER OVERVIEW</div><h3>Lap comparison leaderboard</h3></div><span className="tiny-badge">COMPARE MINUS REFERENCE</span></div><div className="debrief-leaderboard-list">{summaryRows.map((row:any)=><div className="debrief-leaderboard-row" key={row.compare_driver}><div><strong>{row.compare_driver}</strong><span>Lap {row.compare_lap_number} · {row.compare_lap_time_s.toFixed(3)} s</span></div><div className={row.lap_delta_s<0?'debrief-faster':'debrief-slower'}>{row.lap_delta_s>0?'+':''}{row.lap_delta_s.toFixed(3)} s</div><div className="debrief-helper">{row.strongest_corner?`Largest detected window: Zone ${row.strongest_corner.corner_like_segment}, ${Math.abs(row.strongest_corner.compare_minus_primary_time_s).toFixed(3)} s`:'No corner-like windows available'}</div></div>)}</div><p className="debrief-helper">Negative delta = comparison lap faster. Different laps and conditions may not be directly comparable.</p></div>
     {detail && <>
