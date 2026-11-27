@@ -1,4 +1,5 @@
 import SteeringResearchPanel from './SteeringResearchPanel';
+import { apiBaseUrl } from '../services/api';
 import {useEffect, useMemo, useState} from 'react';
 import {BarChart, Bar, CartesianGrid, Legend, LineChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis, ReferenceLine} from 'recharts';
 import {Upload, RefreshCw} from 'lucide-react';
@@ -41,7 +42,7 @@ export default function BenchmarkPage(){
  const [metric,setMetric]=useState<'mae'|'rmse'>('mae');
  async function load(){
   setLoading(true);setError('');
-  try{const response=await fetch('/api/benchmark/latest');if(!response.ok){const result=await response.json().catch(()=>({}));throw new Error(result.detail||`HTTP ${response.status}`);}
+  try{const response=await fetch(`${apiBaseUrl}/benchmark/latest`);if(!response.ok){const result=await response.json().catch(()=>({}));throw new Error(result.detail||`HTTP ${response.status}`);}
    setReport(validate(await response.json()));setSource('Backend results/cross_event_real.json');
   }catch(e){setError(e instanceof Error?e.message:String(e));}finally{setLoading(false)}
  }

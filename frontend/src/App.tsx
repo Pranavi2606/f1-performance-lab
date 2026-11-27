@@ -10,7 +10,7 @@ import TelemetryPage from "./components/TelemetryPage";
 import BenchmarkPage from "./components/BenchmarkPage";
 import SteeringResearchPage from "./components/SteeringResearchPage";
 import DebriefPage from "./components/DebriefPage";
-import {apiErrorMessage,checkBackendHealth,getRaceOverview,getRaces} from "./services/api";
+import {apiErrorMessage,backendHealthUrl,checkBackendHealth,getRaceOverview,getRaces} from "./services/api";
 import type {Race} from "./types/f1";
 
 export default function App(){
@@ -23,7 +23,7 @@ export default function App(){
  const race=races.find(r=>r.round===round);
  return <div className="app"><Sidebar active={active} setActive={setActive} year={year} setYear={setYear} races={races} round={round} setRound={setRound}/>
  <main><header className="topbar"><div><div className="top-title"><span className="redline"></span><span>F1 PERFORMANCE LAB</span></div><div className="race-context">{race?.raceName??"Loading"} <b>·</b> {race?.circuitName??""} <b>·</b> {race?.date??""}</div></div><div className="top-status"><Wifi size={13}/> {backendOnline===true?"API CONNECTED":backendOnline===false?"API DISCONNECTED":"CHECKING API"} <span>v13.3</span></div></header>
- {error&&<div className="error-box">{error} <button type="button" onClick={()=>setRetry(r=>r+1)} style={{marginLeft:12,padding:"6px 12px",cursor:"pointer"}}>Retry connection</button><div style={{marginTop:8,fontSize:12}}>Check <a href="http://127.0.0.1:8000/api/health" target="_blank" rel="noreferrer">backend health endpoint</a>. Start backend with <code>python -m uvicorn app.main:app --reload --port 8000</code> in the backend folder.</div></div>}{loading&&<div className="loading"><RefreshCw className="spin"/> Syncing race data…</div>}
+ {error&&<div className="error-box">{error} <button type="button" onClick={()=>setRetry(r=>r+1)} style={{marginLeft:12,padding:"6px 12px",cursor:"pointer"}}>Retry connection</button><div style={{marginTop:8,fontSize:12}}>Check the <a href={backendHealthUrl} target="_blank" rel="noreferrer">backend health endpoint</a>. For a live site, verify the configured API address; for local development, start FastAPI on port 8000.</div></div>}{loading&&<div className="loading"><RefreshCw className="spin"/> Syncing race data…</div>}
  {!loading&&overview&&active==="results"&&<ResultsPage overview={overview}/>}
  {!loading&&overview&&active==="stints"&&<StintPage year={year} round={round} drivers={overview.drivers}/>}
  {!loading&&overview&&active==="insights"&&<InsightsPage results={overview.results}/>}
