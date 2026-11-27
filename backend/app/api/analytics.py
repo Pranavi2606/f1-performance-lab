@@ -16,18 +16,51 @@ def degradation(year: int, round_num: int, driver_number: int):
         race = next((r for r in schedule if r["round"] == round_num), None)
         if not race:
             raise HTTPException(status_code=404, detail="Race not found")
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise HTTPException(status_code=503, detail=f"Race schedule temporarily unavailable: {exc}")
+
+    try:
         session = openf1.resolve_race_session(year, race["date"])
         key = session["session_key"]
         return {
             "driverNumber": driver_number,
             "sessionKey": key,
             "raceName": race["raceName"],
-            "analysis": analyze_stints(openf1.get_laps(key, driver_number), openf1.get_stints(key, driver_number)),
+            "source": "OpenF1",
+            "mode": "tyre_stints",
+            "analysis": analyze_stints(openf1.get_laps(key, driver_number),
+                                       openf1.get_stints(key, driver_number)),
         }
-    except HTTPException:
-        raise
-    except Exception as exc:
-        raise HTTPException(status_code=502, detail=f"Degradation analysis failed: {exc}")
+    except Exception:
+        # OpenF1 may reject historical data with 401/429 or may be unavailable.
+        # Preserve a real, independently sourced lap-time view; never fake tyre slopes.
+        try:
+            lap_times = jolpica.get_driver_lap_times(year, round_num, driver_number)
+        except Exception as exc:
+            raise HTTPException(
+                status_code=503,
+                detail=f"Tyre stints currently unavailable from OpenF1; Jolpica lap timing also unavailable: {exc}",
+                headers={"Retry-After": "60"},
+            )
+        if not lap_times:
+            raise HTTPException(
+                status_code=503,
+                detail="Tyre-stint source unavailable and no independently verified race lap timing was returned.",
+                headers={"Retry-After": "60"},
+            )
+        return {
+            "driverNumber": driver_number,
+            "sessionKey": None,
+            "raceName": race["raceName"],
+            "source": "Jolpica",
+            "mode": "lap_times_only",
+            "note": "Real race lap timing only. OpenF1 tyre stints unavailable; no compound, tyre age, degradation slope or model recommendation is inferred.",
+            "lapTiming": lap_times,
+            "analysis": {"cleanLapCount": len(lap_times), "excludedLapCount": 0,
+                         "excludedReasons": [], "stints": []},
+        }
 
 @router.get("/analytics/race-control/{year}/{round_num}")
 def race_control(year: int, round_num: int):
