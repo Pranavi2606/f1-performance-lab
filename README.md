@@ -2,6 +2,10 @@
 
 **Independent engineering portfolio** | Python · FastAPI · React · TypeScript · statistical modelling · machine learning
 
+**Live demo:** [F1 Performance Lab](https://f1-performance-lab.vercel.app/) · **Backend health:** [FastAPI status](https://f1-performance-api.vercel.app/api/health) · **Executed benchmark:** [OpenF1 2024 results](https://f1-performance-api.vercel.app/api/benchmark/latest)
+
+> **Live-data availability:** Race results use Jolpica, whereas telemetry and certain analysis pages require OpenF1. OpenF1 may temporarily reject historical calls (observed HTTP 401 during the 27 November 2026 deployment smoke test). Historical benchmark and saved steering experiment displays are bundled and do not depend on live OpenF1 requests. These outputs are research demonstrations, not validated team engineering measurements.
+
 Research-oriented Formula 1 analysis using publicly available Jolpica classification data and OpenF1 telemetry. Explores vehicle performance, driver-lap comparisons, tyre-stint trends, energy *proxies*, predictive baselines and race strategy scenarios. **Not affiliated with Formula 1, the FIA, or any team.**
 
 ## What the application does
